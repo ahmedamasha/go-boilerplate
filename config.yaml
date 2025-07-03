@@ -1,0 +1,41 @@
+server:
+  port: "8081"
+  host: "localhost"
+
+database:
+  host: "localhost"
+  port: "5432"
+  user: "user"
+  password: "password"
+  dbname: "mytestdb"
+  sslmode: "disable"
+
+redis:
+  host: "localhost"
+  port: "6379"
+  password: ""
+  db: 0
+
+  debug_mode: false
+  enable_preview_mode: false
+  enhanced_intent_scoring: true
+  visitor_history_tracking: true
+  rage_click_detection: true
+  session_replay: true
+  watchlist: true
+  popup_rule_conditions: true
+  
+  # Intent rules
+  rules:
+    - name: "high_intent"
+      condition: "product_page_views > 2"
+    - name: "medium_intent"
+      condition: "scroll_depth > 80 and time_on_page > 40"
+    - name: "low_intent"
+      condition: "else"
+  # Rage click
+  rage_click_threshold: 3
+  rage_click_window_sec: 2
+  # Popup rule
+  popup_idle_sec: 20
+  popup_intent: "high" 
