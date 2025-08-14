@@ -1,15 +1,26 @@
-# Go Multi-Layer Application Boilerplate
+# E-Commerce Analytics & Personalization System
 
-A clean, production-ready Go backend boilerplate with multi-layer architecture, featuring:
+A comprehensive Phase 1 implementation of an e-commerce analytics and personalization system built with Go, featuring real-time event processing, rule-based user segmentation, and automated offer generation.
 
-- **Multi-layer architecture** (Controllers, Services, Repositories)
-- **PostgreSQL** database integration
-- **Redis** caching and session management
-- **Viper** configuration management
-- **Wire** dependency injection
-- **Gorilla Mux** routing
-- **CORS** middleware
-- **Graceful shutdown**
+## Features
+
+### 🚀 Phase 1 Implementation
+- **Event Simulation & Integration**: HTTP endpoints to receive e-commerce events (page views, purchases, cart actions)
+- **Rule-Based Analysis**: Intelligent user segmentation using configurable rules
+- **Real-time Segmentation**: Dynamic user classification (High Spender, Window Shopper, Discount Seeker)
+- **Automated Offer Generation**: Personalized coupons and discounts based on user segments
+- **WebSocket Support**: Real-time notifications for events, segment changes, and offer generation
+- **E-commerce Simulation**: Shopify webhook simulation for testing
+
+### 🛠️ Technical Stack
+- **Language**: Go 1.23+
+- **Framework**: Gorilla Mux (HTTP routing)
+- **Database**: PostgreSQL with raw SQL
+- **Cache**: Redis for session & segment lookups
+- **WebSockets**: Gorilla WebSocket for real-time communication
+- **Authentication**: JWT-based authentication
+- **Containerization**: Docker & Docker Compose
+- **Dependency Injection**: Google Wire
 
 ## 🏗️ Architecture
 

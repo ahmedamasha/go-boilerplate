@@ -23,8 +23,24 @@ func InitializeApp(cfg *config.Config) (*App, error) {
 	userRepository := repositories.NewUserRepository(db)
 	userService := services.NewUserService(userRepository)
 	userController := controllers.NewUserController(userService)
+	eventRepository := repositories.NewEventRepository(db)
+	segmentRepository := repositories.NewSegmentRepository(db)
+	offerRepository := repositories.NewOfferRepository(db)
+	segmentService := services.NewSegmentService(segmentRepository, eventRepository)
+	offerService := services.NewOfferService(offerRepository, segmentRepository, eventRepository)
+	webSocketService := services.NewWebSocketService()
+	eventService := NewEventServiceWithDeps(eventRepository, segmentRepository, offerRepository, segmentService, offerService, webSocketService)
+	eventController := controllers.NewEventController(eventService)
+	segmentController := controllers.NewSegmentController(segmentService)
+	offerController := controllers.NewOfferController(offerService)
+	webSocketController := controllers.NewWebSocketController(webSocketService)
 	app := &App{
-		UserController: userController,
+		UserController:      userController,
+		EventController:     eventController,
+		SegmentController:   segmentController,
+		OfferController:     offerController,
+		WebSocketController: webSocketController,
+		WebSocketService:    webSocketService,
 	}
 	return app, nil
 }
@@ -32,5 +48,25 @@ func InitializeApp(cfg *config.Config) (*App, error) {
 // wire.go:
 
 type App struct {
-	UserController *controllers.UserController
+	UserController      *controllers.UserController
+	EventController     *controllers.EventController
+	SegmentController   *controllers.SegmentController
+	OfferController     *controllers.OfferController
+	WebSocketController *controllers.WebSocketController
+	WebSocketService    *services.WebSocketService
+}
+
+// NewEventServiceWithDeps creates EventService and sets up dependencies to avoid circular imports
+func NewEventServiceWithDeps(
+	eventRepo *repositories.EventRepository,
+	segmentRepo *repositories.SegmentRepository,
+	offerRepo *repositories.OfferRepository,
+	segmentService *services.SegmentService,
+	offerService *services.OfferService,
+	wsService *services.WebSocketService,
+) *services.EventService {
+	eventService := services.NewEventService(eventRepo, segmentRepo, offerRepo)
+	eventService.SetServices(segmentService, offerService, wsService)
+	offerService.SetWebSocketService(wsService)
+	return eventService
 }

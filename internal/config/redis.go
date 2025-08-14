@@ -36,3 +36,4 @@ func NewRedisConnection(cfg *Config) (*redis.Client, error) {
 func GetRedisClient() *redis.Client {
 	return redisClient
 }
+ 

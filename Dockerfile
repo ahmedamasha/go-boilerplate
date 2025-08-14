@@ -29,8 +29,11 @@ RUN apk add --no-cache ca-certificates
 # Copy the binary from builder
 COPY --from=builder /app/main .
 
+# Copy configuration file
+COPY config.yaml .
+
 # Expose port
-EXPOSE 8080
+EXPOSE 8081
 
 # Command to run the application
 CMD ["./main"] 

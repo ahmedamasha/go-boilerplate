@@ -113,6 +113,22 @@ docker-build:
 	@echo "Building Docker image..."
 	docker build -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
 
+# Run the backend locally with Docker
+.PHONY: run
+run: docker-up
+
+# Build the backend binary
+.PHONY: build
+build:
+	@echo "Building application..."
+	$(GOBUILD) -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/api
+
+# Run unit tests
+.PHONY: test
+test:
+	@echo "Running tests..."
+	$(GOTEST) -v ./...
+
 # Run with Docker Compose
 .PHONY: docker-up
 docker-up:
