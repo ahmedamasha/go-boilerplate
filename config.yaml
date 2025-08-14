@@ -3,7 +3,7 @@ server:
   host: "localhost"
 
 database:
-  host: "localhost"
+  host: "postgres"
   port: "5432"
   user: "user"
   password: "password"
@@ -11,7 +11,7 @@ database:
   sslmode: "disable"
 
 redis:
-  host: "localhost"
+  host: "redis"
   port: "6379"
   password: ""
-  db: 0
+  db: 0 
