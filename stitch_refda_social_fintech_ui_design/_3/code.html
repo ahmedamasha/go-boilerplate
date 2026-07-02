@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رفدة - ملفي الشخصي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e2e3e0",
+                        "secondary-fixed": "#efe0cd",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1a1c1b",
+                        "outline": "#717975",
+                        "surface-bright": "#f9f9f7",
+                        "on-secondary-container": "#6d6354",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-primary-fixed-variant": "#214f41",
+                        "secondary-fixed-dim": "#d2c4b2",
+                        "on-secondary-fixed": "#221a0f",
+                        "inverse-on-surface": "#f1f1ef",
+                        "surface-tint": "#3a6758",
+                        "on-secondary-fixed-variant": "#4f4538",
+                        "tertiary-fixed": "#ffe088",
+                        "surface-container-highest": "#e2e3e0",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#bcedda",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#735c00",
+                        "secondary": "#675d4e",
+                        "surface": "#f9f9f7",
+                        "surface-container": "#eeeeec",
+                        "on-surface": "#1a1c1b",
+                        "surface-container-high": "#e8e8e6",
+                        "on-tertiary-container": "#4e3d00",
+                        "surface-container-low": "#f4f4f1",
+                        "primary-fixed-dim": "#a1d1bf",
+                        "on-surface-variant": "#404945",
+                        "on-primary-container": "#a0cfbe",
+                        "background": "#f9f9f7",
+                        "primary": "#134235",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "inverse-surface": "#2f3130",
+                        "primary-container": "#2d5a4c",
+                        "tertiary-container": "#cca72f",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c0c8c3",
+                        "inverse-primary": "#a1d1bf",
+                        "secondary-container": "#efe0cd",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#002118",
+                        "surface-dim": "#dadad8",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "unit": "4px",
+                        "inline-padding": "12px",
+                        "stack-gap": "16px",
+                        "section-gap": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9f7;
+            font-family: 'Manrope', sans-serif;
+            color: #1a1c1b;
+        }
+        .profile-card-shadow {
+            box-shadow: 0 8px 20px rgba(19, 66, 53, 0.04);
+        }
+        [dir="rtl"] .material-symbols-outlined.rtl-flip {
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-background flex justify-between items-center px-container-margin py-stack-gap">
+<div class="flex items-center gap-inline-padding">
+<span class="material-symbols-outlined text-primary text-headline-lg rtl-flip">arrow_back</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl font-bold text-primary">رفدة</h1>
+<div class="flex items-center gap-inline-padding">
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="px-container-margin space-y-section-gap">
+<!-- User Profile Header -->
+<section class="flex flex-col items-center mt-stack-gap">
+<div class="relative">
+<div class="w-32 h-32 rounded-full border-4 border-secondary-container p-1 overflow-hidden">
+<img alt="أحمد آل سعود" class="w-full h-full object-cover rounded-full" data-alt="A professional and warm close-up portrait of a Saudi man with a neatly trimmed beard, wearing a traditional white thobe. The background is a soft, blurred minimalist architectural space with warm desert lighting and a clean, premium fintech aesthetic. The lighting is soft and high-key, emphasizing a look of friendly professionalism and trustworthiness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjsMxC9U1bE91xH3yabbzA4JzcY80fTTAAWa5zUFcdIpVjz9M9n7JlwpUzBeQIv_pXJVDD2ckfpxs3d4u-Js3rCtFht-OesC9PTupPMCTLBZ9NkwB2sONVJrBYC_LiYLV-gexaxldOlRblwHHQiPd4l0Zk1r8hZzXrrfHn52hEgo82ZjI5BkDML-yzU32HUxPs2QPdM38WWkQbsHMfYzt-o-2yzA7Ndwic9WeIkIoU1m6MYnQNuFKMI_iEBeG2lHHq2DMsIhwzPlo"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary text-white p-1.5 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="text-center mt-stack-gap">
+<h2 class="font-headline-lg text-headline-lg text-primary">أحمد آل سعود</h2>
+<div class="flex items-center justify-center gap-unit mt-1">
+<span class="bg-secondary-container text-on-secondary-container px-inline-padding py-0.5 rounded-full font-label-md text-label-md">عضو متميز</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1">الرياض، المملكة العربية السعودية</p>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="grid grid-cols-2 gap-stack-gap">
+<div class="bg-surface-container-lowest profile-card-shadow p-stack-gap rounded-lg flex flex-col items-center text-center">
+<span class="font-headline-lg text-headline-lg text-primary">٢٤</span>
+<span class="font-label-md text-label-md text-outline">إجمالي الهدايا المرسلة</span>
+</div>
+<div class="bg-surface-container-lowest profile-card-shadow p-stack-gap rounded-lg flex flex-col items-center text-center">
+<span class="font-headline-lg text-headline-lg text-primary">٠٨</span>
+<span class="font-label-md text-label-md text-outline">مناسبات مستضافة</span>
+</div>
+</section>
+<!-- Menu List -->
+<section class="space-y-stack-gap">
+<h3 class="font-label-md text-label-md text-outline px-unit uppercase tracking-widest">إعدادات الحساب</h3>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden profile-card-shadow">
+<!-- Personal Information -->
+<div class="flex items-center justify-between p-stack-gap hover:bg-surface-variant/20 transition-colors active:opacity-70">
+<div class="flex items-center gap-stack-gap">
+<div class="bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">المعلومات الشخصية</span>
+</div>
+<span class="material-symbols-outlined text-outline rtl-flip">chevron_right</span>
+</div>
+<hr class="border-surface-variant/30 mx-stack-gap"/>
+<!-- Payment Methods -->
+<div class="flex items-center justify-between p-stack-gap hover:bg-surface-variant/20 transition-colors active:opacity-70">
+<div class="flex items-center gap-stack-gap">
+<div class="bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">طرق الدفع</span>
+<div class="flex gap-unit mt-1">
+<span class="bg-secondary-fixed text-[10px] px-1.5 py-0.5 rounded-sm font-bold text-on-secondary-fixed">مدى</span>
+<span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">ios</span> Pay
+                            </span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline rtl-flip">chevron_right</span>
+</div>
+<hr class="border-surface-variant/30 mx-stack-gap"/>
+<!-- Notification Settings -->
+<div class="flex items-center justify-between p-stack-gap hover:bg-surface-variant/20 transition-colors active:opacity-70">
+<div class="flex items-center gap-stack-gap">
+<div class="bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">إعدادات التنبيهات</span>
+</div>
+<span class="material-symbols-outlined text-outline rtl-flip">chevron_right</span>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-outline px-unit uppercase tracking-widest mt-section-gap">الدعم والقانونية</h3>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden profile-card-shadow">
+<!-- Help & Support -->
+<div class="flex items-center justify-between p-stack-gap hover:bg-surface-variant/20 transition-colors active:opacity-70">
+<div class="flex items-center gap-stack-gap">
+<div class="bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="help">help</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">المساعدة والدعم</span>
+</div>
+<span class="material-symbols-outlined text-outline rtl-flip">chevron_right</span>
+</div>
+<hr class="border-surface-variant/30 mx-stack-gap"/>
+<!-- About Refda -->
+<div class="flex items-center justify-between p-stack-gap hover:bg-surface-variant/20 transition-colors active:opacity-70">
+<div class="flex items-center gap-stack-gap">
+<div class="bg-primary-container/10 p-2 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">عن رفدة</span>
+</div>
+<span class="material-symbols-outlined text-outline rtl-flip">chevron_right</span>
+</div>
+</div>
+<!-- Logout Button -->
+<button class="w-full flex items-center justify-center gap-inline-padding p-stack-gap text-error font-body-md hover:bg-error-container/10 transition-colors rounded-lg mt-stack-gap active:scale-95 transition-transform">
+<span class="material-symbols-outlined rtl-flip" data-icon="logout">logout</span>
+            تسجيل الخروج
+        </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin pb-8 pt-stack-gap bg-surface-container-lowest shadow-[0_-8px_20px_rgba(19,66,53,0.04)] rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md mt-1">الرئيسية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="card_giftcard">card_giftcard</span>
+<span class="font-label-md text-label-md mt-1">سجل الهدايا</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+<span class="font-label-md text-label-md mt-1">الهدايا</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-inline-padding py-unit active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">الحساب</span>
+</div>
+</nav>
+</body></html>

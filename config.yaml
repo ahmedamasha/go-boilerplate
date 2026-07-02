@@ -1,41 +1,31 @@
 server:
-  port: "8081"
-  host: "localhost"
+  port: "8080"
+  host: "0.0.0.0"
 
 database:
   host: "localhost"
   port: "5432"
-  user: "user"
-  password: "password"
-  dbname: "mytestdb"
+  user: "refda"
+  password: "refda"
+  dbname: "refda"
   sslmode: "disable"
 
-redis:
-  host: "localhost"
-  port: "6379"
-  password: ""
-  db: 0
+jwt:
+  secret: "change-me-in-production-refda-jwt-secret"
+  expiry_hours: 168
 
-  debug_mode: false
-  enable_preview_mode: false
-  enhanced_intent_scoring: true
-  visitor_history_tracking: true
-  rage_click_detection: true
-  session_replay: true
-  watchlist: true
-  popup_rule_conditions: true
-  
-  # Intent rules
-  rules:
-    - name: "high_intent"
-      condition: "product_page_views > 2"
-    - name: "medium_intent"
-      condition: "scroll_depth > 80 and time_on_page > 40"
-    - name: "low_intent"
-      condition: "else"
-  # Rage click
-  rage_click_threshold: 3
-  rage_click_window_sec: 2
-  # Popup rule
-  popup_idle_sec: 20
-  popup_intent: "high" 
+otp:
+  expiry_minutes: 5
+  length: 4
+  mock_fixed_code: "1234"  # dev only — always use this code instead of random
+
+storage:
+  type: "local"
+  local_path: "./uploads"
+  base_url: "http://localhost:8080/uploads"
+
+payment:
+  mock: true
+
+admin:
+  api_key: "12345"

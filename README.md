@@ -1,198 +1,120 @@
-# Go Multi-Layer Application Boilerplate
+# Refda (رفدة) Backend
 
-A clean, production-ready Go backend boilerplate with multi-layer architecture, featuring:
+Premium Saudi social-fintech API for social gifting and event registries.
 
-- **Multi-layer architecture** (Controllers, Services, Repositories)
-- **PostgreSQL** database integration
-- **Redis** caching and session management
-- **Viper** configuration management
-- **Wire** dependency injection
-- **Gorilla Mux** routing
-- **CORS** middleware
-- **Graceful shutdown**
+## Stack
 
-## 🏗️ Architecture
+- **Go 1.23+** with [Gin](https://github.com/gin-gonic/gin)
+- **PostgreSQL** + [GORM](https://gorm.io) (data + OTP challenges)
+- **JWT** stateless auth
+- **go-playground/validator**
+
+## Architecture
 
 ```
-├── cmd/api/           # Application entry point
-├── internal/          # Private application code
-│   ├── config/        # Configuration management
-│   ├── controllers/   # HTTP handlers
-│   ├── models/        # Data models
-│   ├── repositories/  # Data access layer
-│   ├── services/      # Business logic
-│   └── utils/         # Utility functions
-├── pkg/               # Public packages
-├── scripts/           # Database migrations
-└── web/               # Static files (if any)
+cmd/api/                 # Entry point
+internal/
+  app/
+    handlers/            # HTTP layer
+    services/            # Business logic
+    repositories/        # Data access
+    dto/                 # Request/response types
+    router/              # Route wiring
+  domain/                # Entities
+  pkg/                   # Shared utilities (config, jwt, otp, storage, …)
+migrations/              # SQL reference migrations
+postman_collection.json  # API collection
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
+
 - Go 1.21+
-- PostgreSQL
-- Redis
-- Make (optional)
+- Docker (optional, for Postgres)
 
-### Setup
+### 1. Start infrastructure
 
-1. **Clone and install dependencies:**
-   ```bash
-   git clone <repository>
-   cd <repository>
-   go mod download
-   ```
-
-2. **Configure environment:**
-   ```bash
-   cp config.yaml.example config.yaml
-   # Edit config.yaml with your database and Redis settings
-   ```
-
-3. **Run database migrations:**
-   ```bash
-   make migrate-up
-   ```
-
-4. **Start the server:**
-   ```bash
-   make run
-   ```
-
-The API will be available at `http://localhost:8080`
-
-## 📋 API Endpoints
-
-### Users
-- `GET /api/v1/users` - Get all users
-- `POST /api/v1/users` - Create a new user
-- `GET /api/v1/users/{id}` - Get user by ID
-- `PUT /api/v1/users/{id}` - Update user
-- `DELETE /api/v1/users/{id}` - Delete user
-
-### Events
-- `POST /api/v1/events` - Process event batch
-- `GET /api/v1/events/{user_id}` - Get events for user
-
-### Health
-- `GET /health` - Health check
-
-## 🛠️ Development
-
-### Available Make Commands
 ```bash
-make run          # Run the application
-make build        # Build the application
+docker compose up -d postgres
+```
+
+If the image pull fails with `unexpected EOF`, retry:
+
+```bash
+docker compose pull postgres
+docker compose up -d postgres
+```
+
+Wait until Postgres is healthy (`docker compose ps` shows `healthy`), then run the API.
+
+### 2. Configure
+
+Edit `config.yaml` if needed (defaults match `docker-compose.yml`).
+
+### 3. Run API
+
+```bash
+go mod download
+make run
+```
+
+API: `http://localhost:8080`  
+Health: `GET /health`
+
+### OTP (development)
+
+OTP codes are logged to stdout:
+
+```
+[MOCK SMS] OTP for +966501234567: 1234
+```
+
+Use that code in `POST /api/v1/auth/verify`.
+
+## API Overview
+
+| Group | Endpoint | Auth |
+|-------|----------|------|
+| Auth | `POST /api/v1/auth/login` | No |
+| Auth | `POST /api/v1/auth/register` | No |
+| Auth | `POST /api/v1/auth/verify` | No |
+| User | `GET /api/v1/users/me` | JWT |
+| User | `PUT /api/v1/users/me` | JWT |
+| Events | `POST /api/v1/events` | JWT |
+| Events | `GET /api/v1/events` | Optional (`?mine=true` + JWT) |
+| Events | `GET /api/v1/events/:id` | No |
+| Gifts | `POST /api/v1/gifts/contribute` | Optional |
+| Gifts | `POST /api/v1/gifts/pay` | No |
+
+Import `postman_collection.json` into Postman for full examples.
+
+Run automated endpoint tests:
+
+```bash
+make run   # terminal 1
+./scripts/test_api.sh   # terminal 2
+```
+
+## Features
+
+- **OTP auth** — Saudi numbers (`+9665XXXXXXXX`), mock SMS
+- **JWT** — 7-day default expiry
+- **Events** — Wedding, newborn, birthday; public/private; hero image upload
+- **Gifts** — Product (group contributions) and cash; atomic `amount_received` updates
+- **Payments** — Mock Mada / Apple Pay; reference numbers (`RFD-XXXX`)
+- **Localization** — Bilingual error payloads (`message` + `message_ar`)
+
+## Make Commands
+
+```bash
+make run          # Run server
+make build        # Build binary
 make test         # Run tests
-make migrate-up   # Run database migrations
-make migrate-down # Rollback database migrations
-make dev-setup    # Setup development environment
+make docker-up    # Start all services
+make docker-down  # Stop services
 ```
 
-### Project Structure
+## License
 
-#### Configuration (`internal/config/`)
-- `config.go` - Main configuration structure
-- `database.go` - Database configuration
-- `redis.go` - Redis configuration
-
-#### Models (`internal/models/`)
-- `user.go` - User model
-- `event.go` - Event models
-
-#### Controllers (`internal/controllers/`)
-- `user_controller.go` - User HTTP handlers
-- `event_controller.go` - Event HTTP handlers
-
-#### Services (`internal/services/`)
-- `user_service.go` - User business logic
-- `event_service.go` - Event business logic
-
-#### Repositories (`internal/repositories/`)
-- `user_repository.go` - User data access
-
-## 🔧 Configuration
-
-The application uses Viper for configuration management. Key configuration options:
-
-```yaml
-server:
-  port: 8080
-  host: "0.0.0.0"
-
-database:
-  host: "localhost"
-  port: 5432
-  name: "app_db"
-  user: "postgres"
-  password: "password"
-  ssl_mode: "disable"
-
-redis:
-  host: "localhost"
-  port: 6379
-  password: ""
-  db: 0
-```
-
-## 📊 Database Schema
-
-### Users Table
-```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
-);
-```
-
-### User Events Table
-```sql
-CREATE TABLE user_events (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    type VARCHAR(32) NOT NULL,
-    data TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
-);
-```
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-make test
-
-# Run tests with coverage
-go test -cover ./...
-
-# Run specific test
-go test ./internal/services
-```
-
-## 🚀 Deployment
-
-### Docker
-```bash
-# Build image
-docker build -t app .
-
-# Run container
-docker run -p 8080:8080 app
-```
-
-### Docker Compose
-```bash
-# Start all services
-docker-compose up -d
-
-# Stop all services
-docker-compose down
-```
-
-## 📝 License
-
-This project is licensed under the MIT License. 
+MIT

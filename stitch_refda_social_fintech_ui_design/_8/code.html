@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c0c8c3",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#404945",
+                    "primary": "#134235",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#241a00",
+                    "on-secondary-container": "#6d6354",
+                    "surface-tint": "#3a6758",
+                    "primary-fixed": "#bcedda",
+                    "on-primary-fixed-variant": "#214f41",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1b",
+                    "outline": "#717975",
+                    "on-secondary-fixed-variant": "#4f4538",
+                    "on-primary-fixed": "#002118",
+                    "surface-container": "#eeeeec",
+                    "secondary": "#675d4e",
+                    "on-primary-container": "#a0cfbe",
+                    "tertiary-container": "#cca72f",
+                    "surface": "#f9f9f7",
+                    "primary-fixed-dim": "#a1d1bf",
+                    "primary-container": "#2d5a4c",
+                    "inverse-on-surface": "#f1f1ef",
+                    "surface-variant": "#e2e3e0",
+                    "surface-container-high": "#e8e8e6",
+                    "on-secondary-fixed": "#221a0f",
+                    "inverse-surface": "#2f3130",
+                    "tertiary-fixed": "#ffe088",
+                    "surface-bright": "#f9f9f7",
+                    "on-background": "#1a1c1b",
+                    "secondary-fixed-dim": "#d2c4b2",
+                    "error-container": "#ffdad6",
+                    "background": "#f9f9f7",
+                    "surface-container-highest": "#e2e3e0",
+                    "on-tertiary-container": "#4e3d00",
+                    "surface-dim": "#dadad8",
+                    "secondary-fixed": "#efe0cd",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#a1d1bf",
+                    "surface-container-low": "#f4f4f1",
+                    "tertiary": "#735c00",
+                    "secondary-container": "#efe0cd",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-gap": "16px",
+                    "container-margin": "24px",
+                    "section-gap": "32px",
+                    "inline-padding": "12px"
+            },
+            "fontFamily": {
+                    "label-md": ["Manrope"],
+                    "body-sm": ["Manrope"],
+                    "headline-xl": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9f7;
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="bg-surface sticky top-0 z-50 flex justify-between items-center w-full px-container-margin py-4">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-primary active:scale-95 transition-transform duration-200" data-icon="arrow_forward_ios">arrow_forward_ios</button>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">إضافة مناسبة</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a Saudi man in a traditional white thobe and ghutra, set against a soft, blurred studio background. The lighting is warm and cinematic, highlighting the friendly and reliable persona suitable for a premium financial app. The image features high clarity and elegant color tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQVtXeoVZ0V07N0bLuIpEPBA1yGcML7m4_mUogUEZPrMToVmZwLDyJVLXPaVGAnA2Jp16kLSoVPztx_Juuww6gyNuObnm3wKp44WlccMf8eKplXWSyiNXxyNKYCO9A_HOqIi4GR-Do1hiFai8vfRAYuA4oQMowgO1GVBrmBVRjxl17c0VpDIuzMLbEeXvOLu_s1-xuM6e7MzlJoOwH2CWQpuDG3ytw17GHWw2FNpaKFkk6OGKnQwChRd-c_J0pfXXGT998kac1jVk"/>
+</div>
+</header>
+<main class="px-container-margin mt-stack-gap space-y-section-gap">
+<!-- Hero Section -->
+<section class="relative h-48 rounded-lg overflow-hidden shadow-lg">
+<img alt="Event Setup" class="w-full h-full object-cover" data-alt="A luxurious wedding reception setup in Saudi Arabia with warm golden lighting and elegant floral arrangements. The scene features delicate table settings with white roses and candles, reflecting cultural warmth and high-end hospitality. The overall atmosphere is sophisticated and inviting, using a palette of soft sands and rich greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuG__JZ4JEeNO_n-Ncgat-cvZ7u5Pj7bBfn-qLpDZyePMUTjguM2Hc-D4WZPtdP_WURestpaOm6TSpSqB_nU6j6kmvHkpxlnEyUrng4YOw-oUCJjzmfE9T4DSzGR7hdcPc2MyAYsJv8d75kXCo79tewFEvXaFfJIm5K5QULzr3L4JLB56MMITcvGFY34TZUcCmIbiZK4fD0wgjPJNaFdUNWnmi-HE5woEBwaknAem1oIdvvEKgzpkfwM5KTxmlXEsIbCigDxr9La4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<p class="text-white font-headline-lg text-headline-lg">وثّق لحظاتك السعيدة</p>
+</div>
+</section>
+<!-- Event Type Selection (Horizontal Scroll Cards) -->
+<section>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">نوع المناسبة</h2>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
+<div class="flex-shrink-0 w-32 h-40 bg-surface-container-lowest rounded-lg border-2 border-primary flex flex-col items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="favorite">favorite</span>
+<span class="font-label-md text-label-md text-primary">زواج</span>
+</div>
+<div class="flex-shrink-0 w-32 h-40 bg-surface-container-lowest rounded-lg border border-outline-variant flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="child_care">child_care</span>
+<span class="font-label-md text-label-md text-on-surface-variant">مولود جديد</span>
+</div>
+<div class="flex-shrink-0 w-32 h-40 bg-surface-container-lowest rounded-lg border border-outline-variant flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="school">school</span>
+<span class="font-label-md text-label-md text-on-surface-variant">تخرج</span>
+</div>
+<div class="flex-shrink-0 w-32 h-40 bg-surface-container-lowest rounded-lg border border-outline-variant flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="celebration">celebration</span>
+<span class="font-label-md text-label-md text-on-surface-variant">أخرى</span>
+</div>
+</div>
+</section>
+<!-- Form Fields -->
+<section class="space-y-stack-gap">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block px-1">عنوان المناسبة</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-outline" placeholder="مثلاً: زواج عبدالله ونورة" type="text"/>
+</div><div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block px-1">أضف صور الهدايا (مثل: ثلاجة، غسالة، فرن)</label>
+<div class="w-full h-32 border-2 border-dashed border-outline-variant rounded-lg bg-surface-container-lowest flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="add_a_photo">add_a_photo</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">اضغط هنا لإضافة صور الهدايا</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline px-1">يمكنك رفع حتى 5 صور</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block px-1">تاريخ المناسبة</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-on-surface" type="date"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block px-1">الوقت المتوقع</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-on-surface" type="time"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block px-1">المبلغ المستهدف (اختياري)</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-4 pr-16 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="0.00" type="number"/>
+<span class="absolute right-4 font-bold text-primary">ر.س</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline px-1">سيتم استخدام هذا كهدف للهدايا الجماعية</p>
+</div>
+</section>
+<!-- Privacy & Contributors -->
+<section class="bg-primary-container/10 p-6 rounded-lg border border-primary-container/20 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="public">public</span>
+<div>
+<p class="font-label-md text-label-md text-primary">مناسبة عامة</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">يمكن للجميع البحث عن المناسبة وإرسال الهدايا</p>
+</div>
+</div>
+<div class="relative inline-block w-12 h-6 rounded-full bg-primary p-1 cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-white transition-all transform translate-x-0"></div>
+</div>
+</div>
+</section>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary py-5 rounded-lg font-headline-lg text-headline-lg shadow-lg active:scale-[0.98] transition-transform flex items-center justify-center gap-3">
+<span>إنشاء المناسبة</span>
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface dark:bg-surface-container-lowest shadow-[0_-8px_20px_0_rgba(19,66,53,0.04)] flex justify-around items-center px-container-margin py-stack-gap rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-4 py-2 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-md text-label-md">المناسبات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+<span class="font-label-md text-label-md">الهدايا</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">حسابي</span>
+</a>
+</nav>
+<!-- Contextual FAB (Optional for Create) -->
+<button class="fixed bottom-24 left-6 w-14 h-14 bg-tertiary-container text-on-tertiary-container rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="magic_button">magic_button</span>
+</button>
+</body></html>

@@ -1,0 +1,690 @@
+{
+  "info": {
+    "_postman_id": "refda-api-v1",
+    "name": "Refda API",
+    "description": "Refda (رفدة) — Saudi social gifting backend.\n\n## Setup\n1. Start Postgres: `docker compose up -d postgres`\n2. Run API: `make run`\n3. Collection variables are pre-filled for local dev.\n\n## Dev credentials\n- **Phone:** `+966501234567`\n- **OTP:** `1234` (fixed in `config.yaml` → `otp.mock_fixed_code`)\n- **Admin key:** `12345` (header `X-Admin-Key`)\n\n## Recommended flow (run in order)\n1. **Auth → Login** → **Verify OTP** (saves `token`)\n2. **Events → Create Event** (status `pending_review`, saves `eventId`, `giftId`)\n3. **Admin → Approve Event** (status `open`)\n4. **Gifts → Contribute** → **Pay** (repeat until 100% collected)\n5. **Events → Get Event By ID** (status `collected`)\n6. **Events → Withdraw** (partial then full → `partial_withdrawn` / `fully_withdrawn`)\n\n## Event statuses\n`pending_review` → `open` → `collected` → `partial_withdrawn` → `fully_withdrawn`\n\nContributions are only accepted when status is `open`.\nWithdrawals only when status is `collected` or `partial_withdrawn`.\n\n## Response envelope\n`{ \"success\": true|false, \"data\"?: ..., \"error\"?: { \"code\", \"message\", \"message_ar\" } }`",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "phone", "value": "+966501234567" },
+    { "key": "registerPhone", "value": "+966509876543" },
+    { "key": "otp", "value": "1234", "description": "Fixed dev OTP (config.yaml mock_fixed_code)" },
+    { "key": "adminKey", "value": "12345", "description": "X-Admin-Key header value" },
+    { "key": "token", "value": "" },
+    { "key": "userId", "value": "" },
+    { "key": "eventId", "value": "" },
+    { "key": "giftId", "value": "", "description": "Product gift ID from Create Event" },
+    { "key": "giftCashId", "value": "" },
+    { "key": "contributionId", "value": "" },
+    { "key": "withdrawalId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('success', () => pm.expect(j.success).to.eql(true));",
+                  "pm.test('service refda-api', () => pm.expect(j.data.service).to.eql('refda-api'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (Send OTP)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('OTP sent', () => {",
+                  "  pm.expect(j.success).to.eql(true);",
+                  "  pm.expect(j.data.message).to.eql('OTP sent');",
+                  "});",
+                  "console.log('Dev OTP is always: ' + pm.collectionVariables.get('otp'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{phone}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/auth/login",
+            "description": "Sends OTP to an existing or new phone. Accepts +9665XXXXXXXX, 05XXXXXXXX, or 5XXXXXXXX.\n\nDev: OTP is always `1234` (see config.yaml)."
+          }
+        },
+        {
+          "name": "Register (Send OTP)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('OTP sent', () => pm.expect(j.success).to.eql(true));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{registerPhone}}\",\n  \"full_name\": \"سارة علي\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/auth/register",
+            "description": "Fails with USER_EXISTS if phone is already registered. Use a new `registerPhone` for first-time signup."
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('JWT issued', () => {",
+                  "  pm.expect(j.success).to.eql(true);",
+                  "  pm.expect(j.data.token).to.be.a('string');",
+                  "});",
+                  "if (j.data && j.data.token) {",
+                  "  pm.collectionVariables.set('token', j.data.token);",
+                  "  pm.collectionVariables.set('userId', j.data.user.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{phone}}\",\n  \"code\": \"{{otp}}\",\n  \"full_name\": \"أحمد محمد\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/auth/verify",
+            "description": "`full_name` is required only when creating a new user via Login flow.\n\nDev OTP: `1234` (4 digits)."
+          }
+        },
+        {
+          "name": "Verify OTP (Register flow)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "if (j.data && j.data.token) {",
+                  "  pm.collectionVariables.set('token', j.data.token);",
+                  "  pm.collectionVariables.set('userId', j.data.user.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"{{registerPhone}}\",\n  \"code\": \"{{otp}}\",\n  \"full_name\": \"سارة علي\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/auth/verify"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('profile', () => {",
+                  "  pm.expect(j.data.phone).to.match(/^\\+9665/);",
+                  "  pm.expect(j.data.full_name).to.be.a('string');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/v1/users/me"
+          }
+        },
+        {
+          "name": "Update Profile (JSON)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('updated', () => pm.expect(pm.response.json().data.location).to.eql('الرياض'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"أحمد محمد\",\n  \"location\": \"الرياض\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/users/me"
+          }
+        },
+        {
+          "name": "Update Profile (multipart + avatar)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "full_name", "value": "أحمد محمد", "type": "text" },
+                { "key": "location", "value": "جدة", "type": "text" },
+                {
+                  "key": "profile_picture",
+                  "type": "file",
+                  "src": [],
+                  "description": "Optional image file"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/api/v1/users/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Approve Event",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('status open', () => pm.expect(j.data.status).to.eql('open'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-Admin-Key", "value": "{{adminKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approve\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/admin/events/{{eventId}}/review",
+            "description": "Moves event from `pending_review` → `open`. Required before accepting contributions.\n\nHeader: `X-Admin-Key: 12345`"
+          }
+        },
+        {
+          "name": "Reject Event",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('status rejected', () => pm.expect(j.data.status).to.eql('rejected'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "X-Admin-Key", "value": "{{adminKey}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approve\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/admin/events/{{eventId}}/review",
+            "description": "Moves event from `pending_review` → `rejected`."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Create Event",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 201', () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "pm.test('event created pending_review', () => {",
+                  "  pm.expect(j.success).to.eql(true);",
+                  "  pm.expect(j.data.status).to.eql('pending_review');",
+                  "  pm.expect(j.data.gifts.length).to.be.above(0);",
+                  "});",
+                  "if (j.data) {",
+                  "  pm.collectionVariables.set('eventId', j.data.id);",
+                  "  const product = j.data.gifts.find(g => g.type === 'product');",
+                  "  const cash = j.data.gifts.find(g => g.type === 'cash');",
+                  "  if (product) pm.collectionVariables.set('giftId', product.id);",
+                  "  if (cash) pm.collectionVariables.set('giftCashId', cash.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"حفل زفاف أحمد وفاطمة\",\n  \"event_type\": \"wedding\",\n  \"event_date\": \"2026-08-15\",\n  \"event_time\": \"19:00\",\n  \"target_amount\": 1000,\n  \"privacy\": \"public\",\n  \"gifts\": [\n    {\n      \"name\": \"طقم ذهب\",\n      \"type\": \"product\",\n      \"target_amount\": 800,\n      \"image_urls\": []\n    },\n    {\n      \"name\": \"مساهمة نقدية\",\n      \"type\": \"cash\"\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/events",
+            "description": "Creates event with status `pending_review`. Admin must approve before contributions.\n\nevent_type: wedding | newborn | birthday | other\nprivacy: public | private\ngift type: product | cash\nevent_date: YYYY-MM-DD or ISO 8601"
+          }
+        },
+        {
+          "name": "Create Event (multipart + hero image)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "payload",
+                  "value": "{\"title\":\"حفل مولود\",\"event_type\":\"newborn\",\"event_date\":\"2026-09-01\",\"event_time\":\"14:00\",\"privacy\":\"private\",\"gifts\":[{\"name\":\"عربة أطفال\",\"type\":\"product\",\"target_amount\":3000}]}",
+                  "type": "text"
+                },
+                {
+                  "key": "hero_image",
+                  "type": "file",
+                  "src": [],
+                  "description": "Optional hero image"
+                }
+              ]
+            },
+            "url": "{{baseUrl}}/api/v1/events"
+          }
+        },
+        {
+          "name": "Get Event List (Public)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('array', () => pm.expect(pm.response.json().data).to.be.an('array'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/v1/events",
+            "description": "Public events only. Excludes `pending_review` and `rejected`."
+          }
+        },
+        {
+          "name": "Get My Events",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/events?mine=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "events"],
+              "query": [{ "key": "mine", "value": "true" }]
+            },
+            "description": "Returns all events owned by the authenticated user (all statuses)."
+          }
+        },
+        {
+          "name": "Get Event By ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('has gifts', () => pm.expect(j.data.gifts).to.be.an('array'));",
+                  "pm.test('has finance fields', () => {",
+                  "  pm.expect(j.data).to.have.property('status');",
+                  "  pm.expect(j.data).to.have.property('amount_collected');",
+                  "  pm.expect(j.data).to.have.property('amount_withdrawn');",
+                  "  pm.expect(j.data).to.have.property('amount_available');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/events/{{eventId}}?hide_amounts=false",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "events", "{{eventId}}"],
+              "query": [{ "key": "hide_amounts", "value": "false" }]
+            }
+          }
+        },
+        {
+          "name": "Get Event By ID (hide amounts)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/events/{{eventId}}?hide_amounts=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "events", "{{eventId}}"],
+              "query": [{ "key": "hide_amounts", "value": "true" }]
+            },
+            "description": "Omits amount_received on gifts when hide_amounts=true"
+          }
+        },
+        {
+          "name": "Withdraw (Partial)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('partial withdrawal', () => {",
+                  "  pm.expect(j.success).to.eql(true);",
+                  "  pm.expect(j.data.event_status).to.eql('partial_withdrawn');",
+                  "});",
+                  "if (j.data && j.data.withdrawal_id) {",
+                  "  pm.collectionVariables.set('withdrawalId', j.data.withdrawal_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 400\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/events/{{eventId}}/withdraw",
+            "description": "Owner only. Event must be `collected` (100% target reached).\n\nWithdraws up to `amount_available`. Status becomes `partial_withdrawn` or `fully_withdrawn`."
+          }
+        },
+        {
+          "name": "Withdraw (Full Remainder)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('fully withdrawn', () => {",
+                  "  pm.expect(j.data.event_status).to.eql('fully_withdrawn');",
+                  "  pm.expect(j.data.amount_available).to.eql(0);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 600\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/events/{{eventId}}/withdraw",
+            "description": "Withdraw remaining balance after partial withdrawal (400 + 600 = 1000 target)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Gifts",
+      "item": [
+        {
+          "name": "Contribute (Partial — Group Gift)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 201', () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "pm.test('pending contribution', () => {",
+                  "  pm.expect(j.data.status).to.eql('pending');",
+                  "  pm.expect(j.data.reference_number).to.match(/^RFD-/);",
+                  "});",
+                  "if (j.data && j.data.contribution_id) {",
+                  "  pm.collectionVariables.set('contributionId', j.data.contribution_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"{{eventId}}\",\n  \"gift_id\": \"{{giftId}}\",\n  \"amount\": 300,\n  \"hide_amount\": false,\n  \"message\": \"مبارك عليكم!\",\n  \"reserve_full\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/gifts/contribute",
+            "description": "Event must be `open`. Returns EVENT_NOT_OPEN if pending_review.\n\nPartial contribution toward a product gift. Omit gift_id for direct cash to event."
+          }
+        },
+        {
+          "name": "Contribute (Cash Direct to Event)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 201', () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "if (j.data && j.data.contribution_id) {",
+                  "  pm.collectionVariables.set('contributionId', j.data.contribution_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"{{eventId}}\",\n  \"amount\": 200,\n  \"hide_amount\": true,\n  \"message\": \"هدية نقدية\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/gifts/contribute",
+            "description": "No gift_id — cash goes directly to the event."
+          }
+        },
+        {
+          "name": "Contribute (Reserve Full Gift)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 201', () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "if (j.data && j.data.contribution_id) {",
+                  "  pm.collectionVariables.set('contributionId', j.data.contribution_id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"{{eventId}}\",\n  \"gift_id\": \"{{giftId}}\",\n  \"amount\": 500,\n  \"reserve_full\": true,\n  \"message\": \"أهدي لكم الهدية كاملة\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/gifts/contribute",
+            "description": "Reserves the full remaining balance on a product gift. After 300 SAR partial on 800 target, reserve_full covers 500 remaining."
+          }
+        },
+        {
+          "name": "Pay (Mada)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.test('completed', () => {",
+                  "  pm.expect(j.data.status).to.eql('completed');",
+                  "  pm.expect(j.data.gift_card).to.be.an('object');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contribution_id\": \"{{contributionId}}\",\n  \"payment_method\": \"mada\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/gifts/pay",
+            "description": "Mock payment — marks contribution completed and updates gift amounts.\n\nWhen total collected reaches target, event status auto-updates to `collected`.\n\npayment_method: mada | apple_pay"
+          }
+        },
+        {
+          "name": "Pay (Apple Pay)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contribution_id\": \"{{contributionId}}\",\n  \"payment_method\": \"apple_pay\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/api/v1/gifts/pay"
+          }
+        }
+      ]
+    }
+  ]
+}

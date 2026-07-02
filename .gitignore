@@ -29,4 +29,12 @@ go.work
 
 # OS specific files
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Refda
+uploads/
+build/
+coverage.out
+config.local.yaml
+web/dist/
+web/node_modules/ 

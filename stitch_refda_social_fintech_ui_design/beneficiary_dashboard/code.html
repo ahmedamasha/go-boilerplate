@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#221a0f",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffe088",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2f3130",
+                        "primary-container": "#2d5a4c",
+                        "outline": "#717975",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-container": "#4e3d00",
+                        "on-error-container": "#93000a",
+                        "primary": "#134235",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#a1d1bf",
+                        "surface-dim": "#dadad8",
+                        "primary-fixed-dim": "#a1d1bf",
+                        "on-secondary-fixed-variant": "#4f4538",
+                        "on-primary-fixed": "#002118",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "secondary-fixed-dim": "#d2c4b2",
+                        "on-secondary-container": "#6d6354",
+                        "outline-variant": "#c0c8c3",
+                        "on-primary-fixed-variant": "#214f41",
+                        "secondary-fixed": "#efe0cd",
+                        "surface-container-low": "#f4f4f1",
+                        "background": "#f9f9f7",
+                        "on-primary-container": "#a0cfbe",
+                        "on-surface": "#1a1c1b",
+                        "on-background": "#1a1c1b",
+                        "surface-container-high": "#e8e8e6",
+                        "primary-fixed": "#bcedda",
+                        "surface-tint": "#3a6758",
+                        "on-surface-variant": "#404945",
+                        "surface-bright": "#f9f9f7",
+                        "secondary-container": "#efe0cd",
+                        "surface-variant": "#e2e3e0",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "secondary": "#675d4e",
+                        "surface-container-highest": "#e2e3e0",
+                        "surface": "#f9f9f7",
+                        "tertiary": "#735c00",
+                        "surface-container": "#eeeeec",
+                        "on-tertiary-fixed": "#241a00",
+                        "tertiary-container": "#cca72f",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "stack-gap": "16px",
+                        "section-gap": "32px",
+                        "unit": "4px",
+                        "inline-padding": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["IBM Plex Sans Arabic", "Manrope"],
+                        "body-sm": ["IBM Plex Sans Arabic", "Manrope"],
+                        "headline-lg": ["IBM Plex Sans Arabic", "Manrope"],
+                        "body-md": ["IBM Plex Sans Arabic", "Manrope"],
+                        "label-md": ["IBM Plex Sans Arabic", "Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f7;
+            font-family: 'IBM Plex Sans Arabic', 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-shadow {
+            shadow: 0 8px 20px 0 rgba(19, 66, 53, 0.04);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-full px-container-margin py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional close-up portrait of a Saudi man in modern attire, smiling warmly against a soft-focus minimalist background. The lighting is warm and cinematic, reflecting a sense of hospitality and success. The image maintains a high-key, clean aesthetic consistent with a premium digital concierge service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB24k5jnjtEzoaL2Uagq6Bblkl1h_2aX6Oe2CbxX1i5ZT2k4LE1-MS-JlOLP8QII9vDZlggBhqo5CjsMf0r_-mZ1d51DNOFqqrlwrn1g-yKBZK0_49uht5avOYmH_nFLQPyxHhoK0j7570k60piCv2uVSs9_S63UsRJw7tXsZDSs8ykFUdpy9RdpHFC2TQOVVBs0gjSGNcYPQk44K0oLoYr6t0amQ4JyX0R7OqYdps-RHupXIn1bk_gDQJM-WashDEN5xZKAcJajxI"/>
+</div>
+</div>
+<h1 class="font-headline-xl text-headline-xl font-bold text-primary dark:text-primary-fixed">Refda</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="mt-24 px-container-margin space-y-section-gap">
+<!-- Welcome Section -->
+<section class="space-y-unit">
+<p class="font-label-md text-label-md text-on-surface-variant">أهلاً بك، أحمد</p>
+<h2 class="font-headline-lg text-headline-lg text-primary">لوحة التحكم الخاصة بك</h2>
+</section>
+<!-- Featured Event Card (Active Registry) -->
+<section class="space-y-stack-gap">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">مناسباتي</h3>
+<span class="font-label-md text-label-md text-primary">عرض الكل</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_8px_20px_0_rgba(19,66,53,0.06)] group">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Wedding Ceremony" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="An elegant wedding reception scene in a luxurious hall with warm golden lighting and delicate floral arrangements. The atmosphere is sophisticated and celebratory, featuring clean lines and organic textures. The color palette is composed of soft creams, sage greens, and gold accents, perfectly matching the refined minimalism of the brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjbuRmef9jsXX3BY1DuXNWV0JmA-KuLzQtngOhJLs-flzJo9PBqEuOPXJ_bIgg2XDNmo_Potuyu8OedjwKjCNbpCq8IUTiTDfZMrgOmfEnJ7HM7cW5zu0RJwR7h8pDldBi47eUFHLsGGXIStRRbkMtdjhONywQMFoJa2xyu6upB2w8Qx4w9WO6ehrj061nWJAMEXAdhlyozJ1Qa40c5dl54qYl6ViJjLv_oFKYZY_3xRFJ6SUkLnCopVZN_8T2ObPuCEFUA7IdAG4"/>
+<div class="absolute top-4 right-4">
+<span class="bg-primary/90 text-on-primary px-3 py-1 rounded-full font-label-md text-label-md backdrop-blur-sm">نشط</span>
+</div>
+</div>
+<div class="p-6 space-y-stack-gap">
+<div class="space-y-1">
+<h4 class="font-headline-lg text-headline-lg text-on-surface">زواج منى وأحمد</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                            15 أكتوبر 2024
+                        </p>
+</div>
+<!-- Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between font-label-md text-label-md text-primary">
+<span>الهدايا المستلمة: ٤٥,٠٠٠ ر.س</span>
+<span>الهدف: ٦٠,٠٠٠ ر.س</span>
+</div>
+<div class="h-3 w-full bg-secondary-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center pt-1">تم تحقيق ٧٥٪ من قائمة الأمنيات</p>
+</div>
+<!-- Actions -->
+<div class="flex gap-stack-gap pt-2">
+<button class="flex-1 bg-primary text-on-primary font-label-md py-4 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+                            إدارة القائمة
+                        </button>
+<button class="flex items-center justify-center w-14 h-14 rounded-lg bg-secondary-container text-primary hover:bg-outline-variant/30 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions / Share Section -->
+<section class="bg-primary-container text-on-primary-container p-6 rounded-lg space-y-stack-gap relative overflow-hidden">
+<div class="relative z-10 space-y-2">
+<h4 class="font-headline-lg text-headline-lg">شارك المناسبة</h4>
+<p class="font-body-sm text-body-sm opacity-90 max-w-[240px]">اجعل من السهل على أحبائك اختيار الهدية المثالية من خلال مشاركة الرابط</p>
+<div class="pt-4 flex flex-wrap gap-stack-gap">
+<button class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-label-md flex items-center gap-3 hover:shadow-lg transition-shadow active:scale-95">
+<span class="material-symbols-outlined" data-icon="qr_code_2">qr_code_2</span>
+                        مشاركة عبر واتساب
+                    </button>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -bottom-6 -left-6 w-32 h-32 bg-on-primary-container/10 rounded-full blur-2xl"></div>
+<div class="absolute -top-10 -right-10 w-40 h-40 border-[20px] border-on-primary-container/5 rounded-full"></div>
+</section>
+<!-- Bento Grid Stats -->
+<section class="grid grid-cols-2 gap-stack-gap">
+<div class="bg-surface-container-low p-5 rounded-lg space-y-2">
+<span class="material-symbols-outlined text-primary" data-icon="favorite">favorite</span>
+<p class="font-headline-lg text-headline-lg text-on-surface">١٢</p>
+<p class="font-label-md text-label-md text-on-surface-variant">مساهمين جدد</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-lg space-y-2">
+<span class="material-symbols-outlined text-primary" data-icon="redeem">redeem</span>
+<p class="font-headline-lg text-headline-lg text-on-surface">٨</p>
+<p class="font-label-md text-label-md text-on-surface-variant">هدايا محجوزة</p>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 left-6 w-16 h-16 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined text-[32px]" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-stack-gap bg-surface dark:bg-surface-container-lowest shadow-[0_-8px_20px_0_rgba(19,66,53,0.04)] rounded-t-lg">
+<!-- Home Active -->
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-4 py-2 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md mt-1">Events</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+<span class="font-label-md text-label-md mt-1">Gifts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

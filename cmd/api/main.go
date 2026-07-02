@@ -9,90 +9,78 @@ import (
 	"syscall"
 	"time"
 
-	"cusror_ai/internal/config"
-	"cusror_ai/internal/middleware"
-
-	"github.com/gorilla/mux"
+	"github.com/refda/backend/internal/app/handlers"
+	"github.com/refda/backend/internal/app/repositories"
+	"github.com/refda/backend/internal/app/router"
+	"github.com/refda/backend/internal/app/services"
+	"github.com/refda/backend/internal/pkg/config"
+	"github.com/refda/backend/internal/pkg/database"
+	jwtpkg "github.com/refda/backend/internal/pkg/jwt"
+	"github.com/refda/backend/internal/pkg/otp"
+	"github.com/refda/backend/internal/pkg/storage"
 )
 
 func main() {
-	// Load configuration
-	cfg, err := config.LoadConfig()
+	cfg, err := config.Load()
 	if err != nil {
-		log.Fatalf("Failed to load config: %v", err)
+		log.Fatalf("config: %v", err)
 	}
 
-	// Initialize Redis connection for side effect/logging
-	_, err = config.NewRedisConnection(cfg)
+	db, err := database.Connect(cfg)
 	if err != nil {
-		log.Fatalf("Failed to connect to Redis: %v", err)
+		log.Fatalf("database: %v", err)
 	}
 
-	// Initialize dependencies using Wire
-	app, err := InitializeApp(cfg)
+	store, err := storage.New(cfg)
 	if err != nil {
-		log.Fatalf("Failed to initialize app: %v", err)
+		log.Fatalf("storage: %v", err)
 	}
 
-	// Create router
-	router := mux.NewRouter()
+	jwtMgr := jwtpkg.NewManager(cfg)
+	otpRepo := repositories.NewOTPRepository(db)
+	otpProvider := otp.NewProvider(otpRepo, cfg)
 
-	// Use CORS middleware from internal/middleware
-	router.Use(middleware.CORS)
+	userRepo := repositories.NewUserRepository(db)
+	eventRepo := repositories.NewEventRepository(db)
+	giftRepo := repositories.NewGiftRepository(db)
+	contributionRepo := repositories.NewContributionRepository(db)
+	withdrawalRepo := repositories.NewWithdrawalRepository(db)
 
-	// Setup routes
-	setupRoutes(router, app)
+	authSvc := services.NewAuthService(userRepo, otpProvider, jwtMgr)
+	userSvc := services.NewUserService(userRepo, store)
+	eventSvc := services.NewEventService(eventRepo, contributionRepo, withdrawalRepo, store)
+	giftSvc := services.NewGiftService(giftRepo, eventRepo, contributionRepo, eventSvc)
 
-	// Create server
-	server := &http.Server{
-		Addr:    cfg.GetServerAddr(),
-		Handler: router,
+	h := &router.Handlers{
+		Auth:  handlers.NewAuthHandler(authSvc),
+		User:  handlers.NewUserHandler(userSvc),
+		Event: handlers.NewEventHandler(eventSvc),
+		Gift:  handlers.NewGiftHandler(giftSvc),
+		Admin: handlers.NewAdminHandler(eventSvc),
 	}
 
-	// Start server in a goroutine
+	engine := router.Setup(cfg, jwtMgr, h)
+
+	srv := &http.Server{
+		Addr:    cfg.ServerAddr(),
+		Handler: engine,
+	}
+
 	go func() {
-		log.Printf("Server starting on %s", cfg.GetServerAddr())
-		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("Failed to start server: %v", err)
+		log.Printf("Refda API listening on %s", cfg.ServerAddr())
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("server: %v", err)
 		}
 	}()
 
-	// Wait for interrupt signal to gracefully shutdown the server
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 
-	log.Println("Server shutting down...")
-
-	// Create a deadline for server shutdown
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-
-	// Attempt graceful shutdown
-	if err := server.Shutdown(ctx); err != nil {
-		log.Fatalf("Server forced to shutdown: %v", err)
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatalf("shutdown: %v", err)
 	}
-
-	log.Println("Server exited")
-}
-
-func setupRoutes(router *mux.Router, app *App) {
-	// API v1 routes
-	apiV1 := router.PathPrefix("/api/v1").Subrouter()
-
-	// User routes
-	apiV1.HandleFunc("/users", app.UserController.GetAllUsers).Methods("GET")
-	apiV1.HandleFunc("/users", app.UserController.CreateUser).Methods("POST")
-	apiV1.HandleFunc("/users/{id}", app.UserController.GetUserByID).Methods("GET")
-	apiV1.HandleFunc("/users/{id}", app.UserController.UpdateUser).Methods("PUT")
-	apiV1.HandleFunc("/users/{id}", app.UserController.DeleteUser).Methods("DELETE")
-
-	// Dashboard endpoint (protected)
-	router.Handle("/dashboard", middleware.JWTAuth(http.HandlerFunc(app.UserController.Dashboard))).Methods("GET")
-
-	// Login endpoint
-	router.HandleFunc("/login", app.UserController.Login).Methods("POST")
-
-	// Health check
-	router.HandleFunc("/health", app.UserController.HealthCheck).Methods("GET")
+	log.Println("server stopped")
 }

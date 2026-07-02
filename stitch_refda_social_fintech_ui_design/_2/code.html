@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#221a0f",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffe088",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2f3130",
+                    "primary-container": "#2d5a4c",
+                    "outline": "#717975",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#4e3d00",
+                    "on-error-container": "#93000a",
+                    "primary": "#134235",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f1f1ef",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#a1d1bf",
+                    "surface-dim": "#dadad8",
+                    "primary-fixed-dim": "#a1d1bf",
+                    "on-secondary-fixed-variant": "#4f4538",
+                    "on-primary-fixed": "#002118",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "secondary-fixed-dim": "#d2c4b2",
+                    "on-secondary-container": "#6d6354",
+                    "outline-variant": "#c0c8c3",
+                    "on-primary-fixed-variant": "#214f41",
+                    "secondary-fixed": "#efe0cd",
+                    "surface-container-low": "#f4f4f1",
+                    "background": "#f9f9f7",
+                    "on-primary-container": "#a0cfbe",
+                    "on-surface": "#1a1c1b",
+                    "on-background": "#1a1c1b",
+                    "surface-container-high": "#e8e8e6",
+                    "primary-fixed": "#bcedda",
+                    "surface-tint": "#3a6758",
+                    "on-surface-variant": "#404945",
+                    "surface-variant": "#e2e3e0",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "secondary": "#675d4e",
+                    "surface-container-highest": "#e2e3e0",
+                    "surface": "#f9f9f7",
+                    "tertiary": "#735c00",
+                    "surface-container": "#eeeeec",
+                    "on-tertiary-fixed": "#241a00",
+                    "tertiary-container": "#cca72f",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "stack-gap": "16px",
+                    "section-gap": "32px",
+                    "unit": "4px",
+                    "inline-padding": "12px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Noto Sans Arabic", "Manrope", "sans-serif"],
+                    "body-sm": ["Noto Sans Arabic", "Manrope", "sans-serif"],
+                    "headline-lg": ["Noto Sans Arabic", "Manrope", "sans-serif"],
+                    "body-md": ["Noto Sans Arabic", "Manrope", "sans-serif"],
+                    "label-md": ["Noto Sans Arabic", "Manrope", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f7;
+            font-family: 'Noto Sans Arabic', 'Manrope', sans-serif;
+            color: #1a1c1b;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-50 flex justify-between items-center w-full px-container-margin py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img alt="User Profile" data-alt="A professional and clean studio headshot of a friendly user with soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMpEehTaofo-0sU1A6eDdL449ildAfwZr29JP1E7BQUkKU8SneOyzBN_0AdGW9Pk0gwoX-aBVTQR-hMfQveZ4ugr_uUaK35LB_qOSVkU2pA-XzqHC9AEISIRWfjBi-wijDPFUMCfe4HhTS7UdksKbBxXUcgoyRq2neIhL-nVq9OJV2xisph5oXe20a8wd8GVBvVrtm_N8clnGCwbvSVaaWyGALnvqtDkv16OjOy4hWDtNQITYUXNU1qxEef0wKynlNOk8BQ9QZc0w"/>
+</div>
+<h1 class="font-headline-xl text-headline-xl font-bold text-primary">رفدة</h1>
+</div>
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-high transition-colors p-2 rounded-full">
+            notifications
+        </button>
+</header>
+<main class="pb-24">
+<!-- Hero Section: Event Header -->
+<section class="px-container-margin pt-stack-gap section-gap">
+<div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
+<img alt="Wedding Banner" class="w-full h-full object-cover" data-alt="A luxurious wedding celebration setup in a modern Saudi ballroom." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5y54HmFZhx-Q629CmnYkMemKpgI6HLDrLAmYPAJZo2TKr-dTbcFBZ5nxGaqOjY29-YD3VumyqqP8-HIn8MBIXiNycDDbqQArUVuJ5Pk966rXwvcoAGE6jcRdCci6d5H84nLt42J94inFf5zjjldt6WP-bzELx4Z9wuEYNDv5miBGRC3F-VpvxU16UILLNB55m7ffVcK54pz1EABg8a2Z6GN4-YDwXWa89dLgVASaUXBks0vzTK9G7q5K5LFkmX2PNbV_5ir91UN4"/>
+<div class="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 text-white text-right">
+<p class="font-label-md text-label-md uppercase tracking-widest opacity-90 mb-1">قائمة هدايا الزفاف</p>
+<h2 class="font-headline-xl text-headline-xl mb-2">زفاف منى وأحمد</h2>
+<p class="font-body-sm text-body-sm opacity-80">الرياض، المملكة العربية السعودية • ١٥ أكتوبر ٢٠٢٤</p>
+</div>
+</div>
+</section>
+<!-- Main Heading Section -->
+<section class="px-container-margin pt-section-gap">
+<h2 class="font-headline-xl text-headline-xl text-primary text-right">تجربة المهدي</h2>
+</section>
+<!-- Direct Cash Contribution Section (New) -->
+<section class="px-container-margin py-stack-gap">
+<div class="bg-secondary-container/30 border border-secondary-container rounded-lg p-5">
+<div class="flex items-start gap-4">
+<div class="bg-secondary-container p-3 rounded-full text-on-secondary-container">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex-grow text-right">
+<h3 class="font-headline-lg text-headline-lg text-on-secondary-container mb-1">مساهمة نقدية مباشرة</h3>
+<p class="font-body-sm text-body-sm text-on-secondary-container/80 mb-4">بإمكانك إرسال مبلغ مالي كهدية مباشرة للعروسين للمساهمة في احتياجاتهم الخاصة.</p>
+<div class="flex gap-2 mb-4 overflow-x-auto no-scrollbar py-1">
+<button class="bg-white border border-secondary-container px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shadow-sm">١٠٠ ريال</button>
+<button class="bg-white border border-secondary-container px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shadow-sm">٢٥٠ ريال</button>
+<button class="bg-white border border-secondary-container px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shadow-sm">٥٠٠ ريال</button>
+<button class="bg-white border border-secondary-container px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap shadow-sm">مبلغ آخر</button>
+</div>
+<button class="w-full bg-secondary text-on-secondary py-3 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    إرسال الآن
+                    <span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy & Filter Section -->
+<section class="px-container-margin py-stack-gap flex flex-col md:flex-row justify-between items-center bg-white/50 backdrop-blur-sm sticky top-[72px] z-40 border-b border-surface-variant/50">
+<div class="flex items-center gap-3 mb-4 md:mb-0">
+<div class="bg-surface-container-low px-4 py-2 rounded-full flex items-center gap-3">
+<span class="font-body-sm text-body-sm text-on-surface-variant">الأسعار مخفية للخصوصية</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<button class="bg-surface-container-low p-2 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar w-full md:w-auto">
+<span class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap cursor-pointer">الكل</span>
+<span class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap cursor-pointer">المطبخ</span>
+<span class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap cursor-pointer">غرفة المعيشة</span>
+<span class="bg-surface-container-low text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap cursor-pointer">إلكترونيات</span>
+</div>
+</section>
+<!-- Registry Grid -->
+<section class="px-container-margin py-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-gap">
+<!-- Card 1: Refrigerator (Group Contribution) -->
+<div class="bg-white rounded-lg p-3 shadow-[0_8px_20px_0_rgba(19,66,53,0.04)] flex flex-col h-full border border-surface-variant/20 group">
+<div class="relative w-full aspect-square rounded-DEFAULT overflow-hidden mb-4">
+<img alt="Luxury Fridge" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7s7QerZixfDPK-R5of5d3Y4DON4C5x9gkgIXyE8sywGBt83WwpBMNj6jD2qO0czk8LaaaA3RnLdGapnT2LNOzpmiRqsbWYNxpKIxDIelmjx8g_Ns4xirc0LB9UoZXIY6PTkTw3kKHWfVDgPyXfiYedCZkwDNy7N5nS066LZQGBOpAIixtiVKZT2KJ8sWhU1G09EUXqLpPflv3JrwdrlBfbCTVEsxCNJSaVc99iGT9EQd00DYkCOycK7g_HWUOWmuYU8yWhoK5mZQ"/>
+<div class="absolute top-3 right-3 bg-tertiary-container/90 text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">groups</span>
+                            مساهمة جماعية
+                        </div>
+</div>
+<div class="flex-grow text-right">
+<h3 class="font-headline-lg text-headline-lg mb-1">ثلاجة ذكية إل جي</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">نظام تبريد متطور مع شاشة لمس</p>
+<div class="mb-4">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant">تم جمع ٦٥٪</span>
+<span class="font-label-md text-label-md text-primary font-bold">٢,٤٠٠ ريال متبقي</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                        ساهم الآن
+                        <span class="material-symbols-outlined text-[18px]">volunteer_activism</span>
+</button>
+</div>
+<!-- Card 2: Coffee Machine (Available) -->
+<div class="bg-white rounded-lg p-3 shadow-[0_8px_20px_0_rgba(19,66,53,0.04)] flex flex-col h-full border border-surface-variant/20 group">
+<div class="relative w-full aspect-square rounded-DEFAULT overflow-hidden mb-4">
+<img alt="Coffee Machine" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Tbh_KhRCt8BwnTXsSGfVUmh6xBiUZ6X-tlhtfj9WVYmoFjnRJKEjweGPHduJetTC4hG1lcbh88fdo439PjJI1pnbw0MhIuNjPf7yyo96mFTX5aEqClT8EuVseBm3rfSpWMI9Wi8lPgG-RyDjVblTkfajzn2RjXYTOw2KujmnvOMvwEbmC8k4i9cCY0O_GwthsiL_LDC5FEsZh0AheceiCbkHEKMILdOIafmV00NFLk_9f0rdTm0D545S0epBZX-4pFYuQqlgENY"/>
+<div class="absolute top-3 left-3 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md">
+                            متاح
+                        </div>
+</div>
+<div class="flex-grow text-right">
+<h3 class="font-headline-lg text-headline-lg mb-1">ماكينة اسبريسو احترافية</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">تصميم كلاسيكي لتحضير قهوة مثالية</p>
+</div>
+<button class="w-full bg-secondary text-on-secondary py-3 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                        إهداء بالكامل
+                        <span class="material-symbols-outlined text-[18px]">redeem</span>
+</button>
+</div>
+<!-- Card 3: Living Room Set (Reserved) -->
+<div class="bg-white rounded-lg p-3 shadow-[0_8px_20px_0_rgba(19,66,53,0.04)] flex flex-col h-full border border-surface-variant/20 opacity-80">
+<div class="relative w-full aspect-square rounded-DEFAULT overflow-hidden mb-4 grayscale-[0.5]">
+<img alt="Living Room Set" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa1bMxwAC-YWX4Y1ZYwEChyUh7d7-ZGNlSaLwLlO_kAaxvhC8B2jL6bF4TjTKCHl9fFKidjsjUsrWbQE2a8ejw_66n_g5iGXXM0jtEdG7mKaia2xnuGWIJUenBrct3jxdL28wxc2_XApZ6LNT_ovuX5BJUueR09iinE3BXSeQetmqZS--U5yFhp1R83V6W8_N15wM-1iou9pkvX5uAmQAzADQNd8Xf5agbIEtZijGkMty6Yj7ME3UQOilxAAjl0nHnwryZQmhO7KI"/>
+<div class="absolute inset-0 bg-on-surface/10 flex items-center justify-center">
+<div class="bg-on-surface/80 text-white px-6 py-2 rounded-full font-headline-lg text-headline-lg backdrop-blur-md">
+                                تم الحجز
+                            </div>
+</div>
+</div>
+<div class="flex-grow text-right">
+<h3 class="font-headline-lg text-headline-lg mb-1">طقم معيشة مودرن</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">أرائك مريحة بتصميم عصري</p>
+</div>
+<button class="w-full bg-surface-container-high text-on-surface-variant/50 py-3 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 cursor-not-allowed" disabled="">
+                        غير متاح
+                        <span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Contribution CTA Banner -->
+<section class="px-container-margin mb-section-gap">
+<div class="bg-primary text-on-primary rounded-lg p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+<div class="absolute -left-20 -top-20 w-64 h-64 bg-primary-container rounded-full blur-3xl opacity-50"></div>
+<div class="relative z-10 flex flex-col items-center md:items-start text-center md:text-right w-full">
+<h2 class="font-headline-xl text-headline-xl mb-3">شاركهم فرحة البداية</h2>
+<p class="font-body-md text-body-md opacity-90 max-w-md">بإمكانك دائماً تقديم مساهمة نقدية مفتوحة للمساعدة في تجهيز منزلهم الجديد.</p>
+</div>
+<button class="relative z-10 bg-on-primary text-primary px-8 py-4 rounded-full font-headline-lg text-headline-lg active:scale-95 transition-transform whitespace-nowrap shadow-xl">
+                    إرسال هدية نقدية
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-container-margin py-stack-gap bg-surface shadow-[0_-8px_20px_0_rgba(19,66,53,0.04)] rounded-t-lg">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-4 py-2" href="#">
+<span class="material-symbols-outlined" data-weight="fill">home</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">المناسبات</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors rounded-lg relative" href="#">
+<div class="absolute -top-1 -left-1 w-2 h-2 bg-error rounded-full"></div>
+<span class="material-symbols-outlined">redeem</span>
+<span class="font-label-md text-label-md">الهدايا</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">الحساب</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-28 left-6 w-14 h-14 bg-tertiary text-on-tertiary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</body></html>

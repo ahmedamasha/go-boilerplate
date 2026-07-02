@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #f9f9f7;
+  --color-surface-dim: #dadad8;
+  --color-surface-bright: #f9f9f7;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f4f1;
+  --color-surface-container: #eeeeec;
+  --color-surface-container-high: #e8e8e6;
+  --color-surface-container-highest: #e2e3e0;
+  --color-on-surface: #1a1c1b;
+  --color-on-surface-variant: #404945;
+  --color-inverse-surface: #2f3130;
+  --color-inverse-on-surface: #f1f1ef;
+  --color-outline: #717975;
+  --color-outline-variant: #c0c8c3;
+  --color-surface-tint: #3a6758;
+  --color-primary: #134235;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #2d5a4c;
+  --color-on-primary-container: #a0cfbe;
+  --color-inverse-primary: #a1d1bf;
+  --color-secondary: #675d4e;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #efe0cd;
+  --color-on-secondary-container: #6d6354;
+  --color-tertiary: #735c00;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #cca72f;
+  --color-on-tertiary-container: #4e3d00;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #bcedda;
+  --color-primary-fixed-dim: #a1d1bf;
+  --color-on-primary-fixed: #002118;
+  --color-on-primary-fixed-variant: #214f41;
+  --color-secondary-fixed: #efe0cd;
+  --color-secondary-fixed-dim: #d2c4b2;
+  --color-on-secondary-fixed: #221a0f;
+  --color-on-secondary-fixed-variant: #4f4538;
+  --color-tertiary-fixed: #ffe088;
+  --color-tertiary-fixed-dim: #e9c349;
+  --color-on-tertiary-fixed: #241a00;
+  --color-on-tertiary-fixed-variant: #574500;
+  --color-background: #f9f9f7;
+  --color-on-background: #1a1c1b;
+  --color-surface-variant: #e2e3e0;
+
+  --radius-sm: 0.5rem;
+  --radius-DEFAULT: 1rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+
+  --spacing-container-margin: 24px;
+  --spacing-stack-gap: 16px;
+  --spacing-section-gap: 32px;
+  --spacing-unit: 4px;
+  --spacing-inline-padding: 12px;
+
+  --font-sans: "IBM Plex Sans Arabic", "Manrope", system-ui, sans-serif;
+  --text-headline-xl: 32px;
+  --text-headline-xl--line-height: 40px;
+  --text-headline-xl--letter-spacing: -0.02em;
+  --text-headline-lg: 24px;
+  --text-headline-lg--line-height: 32px;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.05em;
+
+  --shadow-card: 0 8px 20px 0 rgba(19, 66, 53, 0.06);
+  --shadow-nav: 0 -8px 20px 0 rgba(19, 66, 53, 0.04);
+  --shadow-primary: 0 8px 20px rgba(19, 66, 53, 0.15);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-on-background min-h-dvh;
+  }
+
+  [dir="ltr"] .rtl-flip {
+    transform: scaleX(-1);
+  }
+}
+
+@layer utilities {
+  .text-headline-xl {
+    font-size: var(--text-headline-xl);
+    line-height: var(--text-headline-xl--line-height);
+    letter-spacing: var(--text-headline-xl--letter-spacing);
+    font-weight: 700;
+  }
+
+  .text-headline-lg {
+    font-size: var(--text-headline-lg);
+    line-height: var(--text-headline-lg--line-height);
+    letter-spacing: var(--text-headline-lg--letter-spacing);
+    font-weight: 600;
+  }
+
+  .text-body-md {
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+    font-weight: 400;
+  }
+
+  .text-body-sm {
+    font-size: var(--text-body-sm);
+    line-height: var(--text-body-sm--line-height);
+    font-weight: 400;
+  }
+
+  .text-label-md {
+    font-size: var(--text-label-md);
+    line-height: var(--text-label-md--line-height);
+    letter-spacing: var(--text-label-md--letter-spacing);
+    font-weight: 600;
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-nav {
+    box-shadow: var(--shadow-nav);
+  }
+
+  .shadow-primary {
+    box-shadow: var(--shadow-primary);
+  }
+
+  .desert-sand-gradient {
+    background: linear-gradient(180deg, rgba(239, 224, 205, 0.4) 0%, rgba(249, 249, 247, 1) 100%);
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  display: inline-block;
+  line-height: 1;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}

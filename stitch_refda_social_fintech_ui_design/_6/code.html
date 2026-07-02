@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#2d5a4c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#4f4538",
+                    "on-surface": "#1a1c1b",
+                    "surface-bright": "#f9f9f7",
+                    "on-background": "#1a1c1b",
+                    "outline": "#717975",
+                    "surface-container": "#eeeeec",
+                    "surface-container-highest": "#e2e3e0",
+                    "surface-container-high": "#e8e8e6",
+                    "on-secondary-container": "#6d6354",
+                    "secondary-fixed-dim": "#d2c4b2",
+                    "secondary": "#675d4e",
+                    "tertiary": "#735c00",
+                    "primary-fixed": "#bcedda",
+                    "on-tertiary-container": "#4e3d00",
+                    "inverse-primary": "#a1d1bf",
+                    "tertiary-fixed": "#ffe088",
+                    "primary": "#134235",
+                    "inverse-surface": "#2f3130",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#221a0f",
+                    "tertiary-container": "#cca72f",
+                    "on-primary-container": "#a0cfbe",
+                    "on-primary-fixed-variant": "#214f41",
+                    "surface": "#f9f9f7",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c0c8c3",
+                    "surface-variant": "#e2e3e0",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f1f1ef",
+                    "surface-tint": "#3a6758",
+                    "background": "#f9f9f7",
+                    "secondary-container": "#efe0cd",
+                    "on-surface-variant": "#404945",
+                    "secondary-fixed": "#efe0cd",
+                    "surface-container-low": "#f4f4f1",
+                    "primary-fixed-dim": "#a1d1bf",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#002118",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "surface-dim": "#dadad8",
+                    "on-tertiary-fixed": "#241a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "unit": "4px",
+                    "stack-gap": "16px",
+                    "section-gap": "32px",
+                    "inline-padding": "12px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "body-sm": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .otp-input:focus {
+            border-color: #134235;
+            box-shadow: 0 0 0 2px rgba(19, 66, 53, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-full px-container-margin py-inline-padding top-0 bg-background">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</button>
+<div class="font-headline-lg text-headline-lg text-primary tracking-tight">Refda</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-container-margin py-section-gap">
+<!-- Focus-Driven Identity Section -->
+<div class="w-full max-w-md text-center space-y-stack-gap mb-section-gap">
+<div class="mx-auto w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center mb-unit">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">phonelink_lock</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary">التحقق من الهاتف</h1>
+<p class="font-body-md text-body-md text-on-surface-variant px-container-margin">
+                لقد أرسلنا رمزاً مكوناً من 4 أرقام إلى <span class="font-bold text-on-surface" dir="ltr">+966 XX XXX XXXX</span>
+</p>
+</div>
+<!-- OTP Input Grid -->
+<div class="w-full max-w-md space-y-section-gap">
+<div class="flex justify-center gap-4" dir="ltr">
+<input class="otp-input w-16 h-20 text-center text-headline-xl font-headline-xl bg-surface-container-lowest border-2 border-outline-variant rounded-lg transition-all focus:outline-none" maxlength="1" placeholder="•" type="text"/>
+<input class="otp-input w-16 h-20 text-center text-headline-xl font-headline-xl bg-surface-container-lowest border-2 border-outline-variant rounded-lg transition-all focus:outline-none" maxlength="1" placeholder="•" type="text"/>
+<input class="otp-input w-16 h-20 text-center text-headline-xl font-headline-xl bg-surface-container-lowest border-2 border-outline-variant rounded-lg transition-all focus:outline-none" maxlength="1" placeholder="•" type="text"/>
+<input class="otp-input w-16 h-20 text-center text-headline-xl font-headline-xl bg-surface-container-lowest border-2 border-outline-variant rounded-lg transition-all focus:outline-none" maxlength="1" placeholder="•" type="text"/>
+</div>
+<!-- Timer and Resend -->
+<div class="flex flex-col items-center gap-unit">
+<div class="font-label-md text-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                    إعادة إرسال الرمز خلال 00:54
+                </div>
+<button class="font-label-md text-label-md text-primary opacity-50 cursor-not-allowed" disabled="">
+                    إعادة إرسال الرمز الآن
+                </button>
+</div>
+<!-- Primary Action -->
+<div class="pt-stack-gap">
+<button class="w-full py-4 bg-primary text-on-primary font-headline-lg text-headline-lg rounded-full shadow-[0_8px_20px_rgba(19,66,53,0.15)] hover:bg-primary-container transition-all active:scale-[0.98]">
+                    تحقق
+                </button>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="mt-section-gap flex justify-center opacity-20">
+<img class="h-32 object-contain grayscale mix-blend-multiply" data-alt="A subtle, minimalist graphic pattern inspired by traditional Saudi architectural motifs, rendered in thin lines of primary green against a warm desert sand background. The pattern is organic and flowing, creating a sense of heritage and high-tech sophistication. Soft ambient lighting illuminates the textures, emphasizing a premium and trustworthy financial environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVMeGLArqp_Q2TJKjVA9VllZIwXgjQ0BsIM0W2S7MZZ-vVxG6QfcOdopHnt_C7ctcYHSrFsTvcIq5f7HNiwsFfv1FeclRx54pHgpuPx-GH6C2Z4PtjyczFoyO50NEoi7zV2UbMoj0glIfA3ObZa8xGxxTbXTikqZuABFDfta0lEV2epL0xeRLY5HEDNJbdyTFqP2TXmGpFcMEFnOcF9Fbi-YxgI5l2GHlvQCjDFP3OvxmN5Y7U6moPTGPuXhtpx3TMTTlYKy4tN5c"/>
+</div>
+</main>
+<!-- Visual Footer Anchor -->
+<footer class="p-container-margin text-center">
+<p class="font-body-sm text-body-sm text-outline">
+            تحتاج مساعدة؟ <a class="text-primary font-semibold" href="#">اتصل بالدعم</a>
+</p>
+</footer>
+</body></html>

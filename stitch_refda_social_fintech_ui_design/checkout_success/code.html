@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#221a0f",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffe088",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2f3130",
+                    "primary-container": "#2d5a4c",
+                    "outline": "#717975",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#4e3d00",
+                    "on-error-container": "#93000a",
+                    "primary": "#134235",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f1f1ef",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#a1d1bf",
+                    "surface-dim": "#dadad8",
+                    "primary-fixed-dim": "#a1d1bf",
+                    "on-secondary-fixed-variant": "#4f4538",
+                    "on-primary-fixed": "#002118",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "secondary-fixed-dim": "#d2c4b2",
+                    "on-secondary-container": "#6d6354",
+                    "outline-variant": "#c0c8c3",
+                    "on-primary-fixed-variant": "#214f41",
+                    "secondary-fixed": "#efe0cd",
+                    "surface-container-low": "#f4f4f1",
+                    "background": "#f9f9f7",
+                    "on-primary-container": "#a0cfbe",
+                    "on-surface": "#1a1c1b",
+                    "on-background": "#1a1c1b",
+                    "surface-container-high": "#e8e8e6",
+                    "primary-fixed": "#bcedda",
+                    "surface-tint": "#3a6758",
+                    "on-surface-variant": "#404945",
+                    "surface-bright": "#f9f9f7",
+                    "secondary-container": "#efe0cd",
+                    "surface-variant": "#e2e3e0",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "secondary": "#675d4e",
+                    "surface-container-highest": "#e2e3e0",
+                    "surface": "#f9f9f7",
+                    "tertiary": "#735c00",
+                    "surface-container": "#eeeeec",
+                    "on-tertiary-fixed": "#241a00",
+                    "tertiary-container": "#cca72f",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "stack-gap": "16px",
+                    "section-gap": "32px",
+                    "unit": "4px",
+                    "inline-padding": "12px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Manrope"],
+                    "body-sm": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "label-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .gift-card-gradient {
+            background: linear-gradient(135deg, #134235 0%, #2d5a4c 100%);
+        }
+        .shadow-premium {
+            box-shadow: 0 20px 40px -12px rgba(19, 66, 53, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-20">
+<!-- Top App Bar -->
+<header class="bg-surface docked full-width top-0 flex justify-between items-center w-full px-container-margin py-4 sticky z-40">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-200">arrow_forward</button>
+<h1 class="font-headline-xl text-headline-xl font-bold text-primary">Refda</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional studio portrait of a middle-eastern man in modern attire, captured with soft, warm Rembrandt lighting. The background is a muted, warm beige tone that complements the 'Digital Majlis' aesthetic of the Refda UI. The image has a clean, high-end feel with a shallow depth of field, highlighting the subject's friendly and trustworthy expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaSmBe9I0WLnwlpsf4HLXRCyEXAiHY3GEt7QVZ4UJG5YHZIppguK2KUtNnhQfcrV78DRRUB1toN6_8YQ_4hDJxhpRUQ0VYXMLsLjueL-qPmpQ8XDSmkWCzoz0J9gHL8sw051i7nQvkHuacgrwpIpH_SWc21MTkn-XQUDXqF3CKU5oaL70KQFy0QtGGmikkbWCzonFoRiS5mxS8Gt4bcjrdppWJD_0upFQhQEkAqCK2qwEayecCR-HP_ugxWzzD8arXM2InVhUECYs"/>
+</div>
+</div>
+</header>
+<main class="max-w-xl mx-auto px-container-margin mt-stack-gap space-y-section-gap">
+<!-- Order Summary Section -->
+<section class="space-y-stack-gap">
+<h2 class="font-headline-lg text-headline-lg text-primary">تفاصيل الهدية</h2>
+<div class="bg-surface p-6 rounded-lg shadow-premium border border-outline-variant/30 flex gap-4">
+<div class="w-24 h-24 rounded-DEFAULT overflow-hidden flex-shrink-0">
+<img alt="Product" class="w-full h-full object-cover" data-alt="A high-end, minimalist luxury product shot of a sleek designer watch resting on a textured sandstone surface. The lighting is soft and golden, evocative of sunset in a modern desert setting. The overall composition is clean and airy, using a palette of warm grays, muted greens, and soft whites to match the Refda brand identity of Cultural Warmth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGM1--LD--VpBCTJrfdYCUjAI9HkBfLmbDCAiBNOsaYgO4mBQWSqzuRZEfP8j3vHs71ggo7Xh2_KEjkIO6bvN_Y7SWFURE9GCAF93GS7QVrhFkg3A2XJ1FlO6c2UEwe4kgMHwm_Lds3pm7gmgBcch3R4ObmtN-IoVL0nI3yeEUuM_qeVhfD8cIq5vv_jsUYT27Ta4qNEnl-gVupVSoqqKvOB4tX3OR5rCEPr3ZV5yvfEWu40bQ_V5tYSfI1XoUU23zsKUZivJ3mLY"/>
+</div>
+<div class="flex flex-col justify-center flex-grow">
+<span class="font-label-md text-label-md text-primary bg-primary-fixed px-2 py-1 rounded-full w-fit mb-2">مساهمة جزئية</span>
+<h3 class="font-headline-lg text-body-md font-bold">ساعة ذكية فاخرة</h3>
+<p class="text-on-surface-variant font-body-sm">قائمة هدايا سارة وخالد</p>
+<div class="mt-2 text-primary font-bold">٢٥٠٫٠٠ ر.س</div>
+</div>
+</div>
+</section>
+<!-- Privacy & Social Proof -->
+<section class="bg-surface-container-low p-6 rounded-lg space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-bold text-on-surface">إعدادات الخصوصية</h4>
+<p class="text-on-surface-variant font-body-sm">اختر كيف يظهر اسمك لأصحاب المناسبة</p>
+</div>
+<div class="material-symbols-outlined text-primary text-3xl">shield_person</div>
+</div>
+<div class="space-y-3">
+<label class="flex items-center p-4 bg-surface rounded-DEFAULT border border-outline-variant cursor-pointer active:scale-95 transition-transform">
+<input checked="" class="text-primary focus:ring-primary h-5 w-5" name="privacy" type="radio"/>
+<div class="mr-3">
+<span class="block font-bold">إظهار اسمي للمضيف</span>
+<span class="block text-on-surface-variant font-body-sm italic">"سيظهر اسمك ورسالتك في سجل الهدايا"</span>
+</div>
+</label>
+<label class="flex items-center p-4 bg-surface rounded-DEFAULT border border-outline-variant cursor-pointer active:scale-95 transition-transform">
+<input class="text-primary focus:ring-primary h-5 w-5" name="privacy" type="radio"/>
+<div class="mr-3">
+<span class="block font-bold">إهداء كفاعل خير (مجهول)</span>
+<span class="block text-on-surface-variant font-body-sm italic">"لن يتمكن المضيف من معرفة هويتك"</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Payment Options -->
+<section class="space-y-stack-gap">
+<h2 class="font-headline-lg text-headline-lg text-primary">طريقة الدفع</h2>
+<div class="grid grid-cols-2 gap-4">
+<!-- Apple Pay Style -->
+<button class="bg-black text-white py-4 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-95">
+<span class="font-bold text-lg">Apple Pay</span>
+</button>
+<!-- Mada Style -->
+<button class="bg-white border-2 border-outline-variant py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors active:scale-95">
+<img alt="Mada" class="h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADEHraQCvl8OMH7zmdFlI_JDJowMDj4AK7jG_N_kZ4VnoQP-ldjfIXDuV4pETHCJtio-zgbpdVUUZpqmXSEqaEkZ9GTr-RH4lawPSqFMdV_ExszPP7Lx0d-WSNMWQx974YFbbYxz5UGNiM51pawImIMsZ_Ukwj07lpGHTRj5F2BJiWq5PLk0jRLJZcxyhLv37VKE_4EgmZzTpffjQHjMkNnYZtaAUwjINqKIuIpY-p6NHJ5vWE8IEYDmGeEDm7ZvY_EsHCqybVR7M"/>
+</button>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 rounded-lg font-bold text-lg shadow-premium flex items-center justify-center gap-3 hover:bg-primary-container transition-colors active:scale-95 mt-4">
+<span>تأكيد الدفع ٢٥٠٫٠٠ ر.س</span>
+<span class="material-symbols-outlined">lock</span>
+</button>
+</section>
+<!-- Social Proof Floating Bento -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-secondary-container p-4 rounded-lg flex flex-col items-center text-center justify-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">celebration</span>
+<span class="font-bold text-on-secondary-container">١٢ شخصاً</span>
+<p class="font-body-sm text-on-secondary-container">شاركوا في هذه القائمة</p>
+</div>
+<div class="bg-tertiary-fixed p-4 rounded-lg flex flex-col items-center text-center justify-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-3xl">timer</span>
+<span class="font-bold text-on-tertiary-fixed">٣ أيام</span>
+<p class="font-body-sm text-on-tertiary-fixed">متبقية على المناسبة</p>
+</div>
+</section>
+</main>
+<!-- Success Modal Overlay (Simplified as an inline section for this view) -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-50 flex items-center justify-center px-container-margin">
+<div class="bg-white w-full max-w-md rounded-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
+<!-- Gift Card Visualization -->
+<div class="gift-card-gradient p-8 text-white relative overflow-hidden h-72 flex flex-col justify-between">
+<!-- Decorative Elements -->
+<div class="absolute top-[-20px] right-[-20px] w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+<div class="absolute bottom-[-40px] left-[-40px] w-60 h-60 bg-primary-fixed/20 rounded-full blur-3xl"></div>
+<div class="flex justify-between items-start relative z-10">
+<div>
+<h4 class="font-headline-xl text-headline-lg font-bold mb-1">بطاقة إهداء</h4>
+<p class="text-primary-fixed font-label-md">تم الدفع بنجاح</p>
+</div>
+<span class="material-symbols-outlined text-4xl">redeem</span>
+</div>
+<div class="relative z-10">
+<p class="text-primary-fixed font-label-md mb-2">مقدمة إلى</p>
+<h5 class="text-headline-xl font-bold">سارة وخالد</h5>
+<div class="flex justify-between items-end mt-4">
+<div>
+<p class="text-primary-fixed font-label-md">القيمة</p>
+<p class="font-bold">٢٥٠٫٠٠ ر.س</p>
+</div>
+<div class="text-left">
+<p class="text-primary-fixed font-label-md">المرجع</p>
+<p class="font-bold font-mono">#RFD-8921</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-4 text-center">
+<div class="bg-surface-container-low p-4 rounded-DEFAULT">
+<p class="text-on-surface-variant font-body-sm leading-relaxed">
+                        "لقد تم تسجيل مساهمتك في قائمة هدايا سارة وخالد. يمكنك الآن إرسال رسالة تهنئة خاصة تصلهم فوراً."
+                    </p>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span>إرسال تهنئة</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+<button class="w-full bg-surface-variant text-on-surface-variant py-4 rounded-full font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span>تحميل البطاقة</span>
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<button class="text-on-surface-variant font-label-md hover:text-primary transition-colors py-2">
+                    العودة للرئيسية
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-container-margin py-stack-gap bg-surface shadow-[0_-8px_20px_0_rgba(19,66,53,0.04)] rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg px-4 py-2 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">redeem</span>
+<span class="font-label-md text-label-md">Gifts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:bg-surface-container-low transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+</body></html>

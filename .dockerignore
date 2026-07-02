@@ -1,0 +1,11 @@
+.git
+.cursor
+build
+uploads
+web/node_modules
+web/dist
+stitch_refda_social_fintech_ui_design
+*.md
+tmp
+.env
+.DS_Store

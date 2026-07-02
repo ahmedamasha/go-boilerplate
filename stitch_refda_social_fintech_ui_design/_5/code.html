@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#2d5a4c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#4f4538",
+                    "on-surface": "#1a1c1b",
+                    "surface-bright": "#f9f9f7",
+                    "on-background": "#1a1c1b",
+                    "outline": "#717975",
+                    "surface-container": "#eeeeec",
+                    "surface-container-highest": "#e2e3e0",
+                    "surface-container-high": "#e8e8e6",
+                    "on-secondary-container": "#6d6354",
+                    "secondary-fixed-dim": "#d2c4b2",
+                    "secondary": "#675d4e",
+                    "tertiary": "#735c00",
+                    "primary-fixed": "#bcedda",
+                    "on-tertiary-container": "#4e3d00",
+                    "inverse-primary": "#a1d1bf",
+                    "tertiary-fixed": "#ffe088",
+                    "primary": "#134235",
+                    "inverse-surface": "#2f3130",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#221a0f",
+                    "tertiary-container": "#cca72f",
+                    "on-primary-container": "#a0cfbe",
+                    "on-primary-fixed-variant": "#214f41",
+                    "surface": "#f9f9f7",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c0c8c3",
+                    "surface-variant": "#e2e3e0",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f1f1ef",
+                    "surface-tint": "#3a6758",
+                    "background": "#f9f9f7",
+                    "secondary-container": "#efe0cd",
+                    "on-surface-variant": "#404945",
+                    "secondary-fixed": "#efe0cd",
+                    "surface-container-low": "#f4f4f1",
+                    "primary-fixed-dim": "#a1d1bf",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed": "#002118",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "surface-dim": "#dadad8",
+                    "on-tertiary-fixed": "#241a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "unit": "4px",
+                    "stack-gap": "16px",
+                    "section-gap": "32px",
+                    "inline-padding": "12px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "body-sm": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #f9f9f7;
+        }
+        .login-card-shadow {
+            box-shadow: 0 8px 20px rgba(19, 66, 53, 0.04);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center p-container-margin">
+<!-- Brand Header -->
+<header class="w-full max-w-md flex flex-col items-center mb-section-gap">
+<div class="mb-stack-gap">
+<!-- Simulated Logo with Brand Styling from JSON -->
+<div class="flex flex-col items-center gap-unit">
+<div class="w-16 h-16 bg-primary rounded-xl flex items-center justify-center shadow-lg transform -rotate-3">
+<span class="material-symbols-outlined text-on-primary text-4xl" data-weight="fill">card_giftcard</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight mt-4">رفدة</h1>
+</div>
+</div>
+<div class="text-center space-y-unit">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">مرحباً بك</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">سجل الدخول للمتابعة</p>
+</div>
+</header>
+<!-- Main Login Content -->
+<main class="w-full max-w-md">
+<div class="bg-surface-container-lowest login-card-shadow rounded-lg p-8 flex flex-col gap-stack-gap border border-surface-container-high">
+<!-- Hero Decorative Image -->
+<div class="w-full h-32 rounded-DEFAULT overflow-hidden mb-unit">
+<img class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A luxurious minimalist composition featuring soft silk textures in warm sand and deep emerald green colors. The lighting is diffused and atmospheric, creating a sense of premium Saudi hospitality and high-end digital finance. Golden accents catch the light subtly in the background, reinforcing the sophisticated and reliable brand identity of a modern fintech app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB967g9R3vhEbSnOdx_iFeHWrDgPfrZ4DIk10RN-6gBS8ArRSiG_Xn5pRhmhin_tvuoyDmsR6GXMmA1U8Vnn_3mCscvzH6oO9AVLUf3pKf4bN_FDUEFVBx2CblnXu5WqCE-rRCjKYZmjKy5_rVfQlrjLze4Ox_y0NhQnuIXPuUx-brpuZRZgR6y8mmjTZUMc1mlFl9Y0FOPbAy6VQUvsxz0Zxyqa5yINBQwOdNvi1EyEHbT76ngo63LrccwWm_j1DvJcWb_w4g18kw"/>
+</div>
+<!-- Phone Number Input Group -->
+<div class="flex flex-col gap-unit">
+<label class="font-label-md text-label-md text-on-surface-variant mr-unit uppercase tracking-widest" for="phone">رقم الجوال</label>
+<div class="relative group">
+<div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none gap-2">
+<!-- Saudi Flag Icon Simulation -->
+<div class="w-6 h-4 bg-[#006C35] rounded-sm flex items-center justify-center overflow-hidden">
+<div class="w-px h-2 bg-white/40 transform rotate-12"></div>
+</div>
+<span class="text-on-surface font-semibold text-body-md" dir="ltr">+966</span>
+<div class="h-6 w-px bg-outline-variant mx-unit"></div>
+</div>
+<input class="w-full pr-[110px] pl-inline-padding py-4 bg-surface-container-low border-none rounded-DEFAULT text-on-surface font-body-md focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline-variant text-right" id="phone" placeholder="5X XXX XXXX" type="tel"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-headline-lg text-headline-lg hover:bg-primary-container transition-all active:scale-95 shadow-md flex items-center justify-center gap-unit">
+<span>إرسال الرمز</span>
+<span class="material-symbols-outlined text-on-primary transform rotate-180">arrow_forward</span>
+</button>
+<!-- Secondary Actions -->
+<div class="mt-unit flex flex-col items-center gap-stack-gap">
+<div class="flex items-center gap-unit">
+<a class="font-body-sm text-body-sm text-primary font-bold hover:underline" href="#">ليس لديك حساب؟ سجل الآن</a>
+</div>
+<div class="w-full flex items-center gap-stack-gap opacity-30">
+<div class="h-px bg-outline flex-grow"></div>
+<span class="font-label-md text-label-md">أو</span>
+<div class="h-px bg-outline flex-grow"></div>
+</div>
+<!-- Bio-metric Suggestion -->
+<button class="flex items-center gap-inline-padding px-6 py-3 rounded-full border border-outline-variant hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">fingerprint</span>
+<span class="font-label-md text-label-md text-on-surface-variant">الدخول بواسطة بصمة الوجه</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer Trust Elements -->
+<footer class="mt-section-gap flex flex-col items-center gap-unit text-center">
+<p class="font-label-md text-label-md text-outline">خاضع لرقابة ساما</p>
+<div class="flex gap-stack-gap opacity-40 grayscale">
+<span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+<span class="material-symbols-outlined text-on-surface-variant">security</span>
+</div>
+</footer>
+</body></html>
